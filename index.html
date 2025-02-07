@@ -12,11 +12,17 @@
             margin: 0 auto;
             padding: 2rem;
             color: #333;
+            background-color: #ffffff;
+            position: relative;
+            z-index: 1;
         }
 
         h1 {
             font-size: 2.5rem;
             margin-bottom: 1rem;
+            color: #444;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
         }
 
         h2 {
@@ -28,6 +34,9 @@
 
         p {
             margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+            animation-delay: 0.2s;
         }
 
         ul {
@@ -37,26 +46,38 @@
 
         li {
             margin-bottom: 0.5rem;
+            transition: transform 0.2s ease;
+        }
+
+        li:hover {
+            transform: translateX(5px);
         }
 
         a {
             color: #0366d6;
             text-decoration: none;
+            transition: all 0.2s ease;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
         }
 
         a:hover {
-            text-decoration: underline;
+            background-color: #f6f8fa;
         }
 
         .nav {
             padding: 1rem 0;
             border-bottom: 1px solid #eee;
             margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .nav ul {
             display: flex;
             gap: 2rem;
+            margin: 0;
         }
 
         .nav li {
@@ -70,16 +91,29 @@
 
         .timeline-section {
             margin-top: 2rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+            animation-delay: 0.4s;
         }
 
         .timeline-item {
             margin-bottom: 1.5rem;
+            padding: 1rem;
+            border-radius: 8px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: 1px solid #eee;
+        }
+
+        .timeline-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
         .timeline-year {
             font-weight: bold;
             color: #24292e;
             margin-bottom: 0.5rem;
+            font-size: 1.1rem;
         }
 
         .timeline-description {
@@ -88,16 +122,59 @@
 
         .contact-info {
             margin: 2rem 0;
+            padding: 1rem;
+            border-radius: 8px;
+            background-color: #f6f8fa;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem;
+            }
+
+            .nav ul {
+                gap: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
+
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .nav, .section, h1, h2, .timeline-section, .about-list {
+            position: relative;
         }
     </style>
 </head>
 <body>
+    <div id="particles-js"></div>
     <nav class="nav">
         <ul>
             <li><a href="index.html">Home</a></li>
-            <li><a href="talks.html">Talks</a></li>
-            <li><a href="books.html">Books</a></li>
             <li><a href="writings.html">Writings</a></li>
+            <li><a href="books.html">Books</a></li>
+            <li><a href="talks.html">Talks</a></li>
         </ul>
     </nav>
 
@@ -150,7 +227,73 @@
         <ul class="about-list">
             <li><a href="https://twitter.com/levelheaded_94">Twitter</a></li>
             <li><a href="https://abhishekanand.substack.com/">Substack</a></li>
+            <li><a href="https://www.linkedin.com/in/abhishek-anand1994/" target="_blank">LinkedIn</a></li>
         </ul>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Initialize particles.js
+        particlesJS('particles-js', {
+            particles: {
+                number: {
+                    value: 50,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: '#888888'
+                },
+                shape: {
+                    type: 'circle'
+                },
+                opacity: {
+                    value: 0.1,
+                    random: true
+                },
+                size: {
+                    value: 3,
+                    random: true
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: '#888888',
+                    opacity: 0.1,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 1,
+                    direction: 'none',
+                    random: true,
+                    straight: false,
+                    out_mode: 'out',
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: 'grab'
+                    },
+                    resize: true
+                },
+                modes: {
+                    grab: {
+                        distance: 140,
+                        line_linked: {
+                            opacity: 0.15
+                        }
+                    }
+                }
+            },
+            retina_detect: true
+        });
+    </script>
 </body>
 </html> 
