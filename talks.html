@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talks - Abhishek Anand</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            color: #333;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .nav {
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 2rem;
+        }
+
+        .nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .nav li {
+            margin: 0;
+        }
+
+        a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .talk-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 1024px) {
+            .talk-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .talk-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .talk-item {
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .talk-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .thumbnail-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            background: #f5f5f5;
+        }
+
+        .thumbnail {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .talk-content {
+            padding: 1rem;
+        }
+
+        .talk-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1a1a1a;
+            display: block;
+        }
+
+        .talk-date {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .talk-description {
+            font-size: 0.95rem;
+            color: #444;
+            margin-bottom: 0;
+            min-height: 3em;
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="talks.html">Talks</a></li>
+            <li><a href="books.html">Books</a></li>
+            <li><a href="writings.html">Writings</a></li>
+        </ul>
+    </nav>
+
+    <h1>Talks</h1>
+
+    <div class="talk-grid">
+        <div class="talk-item">
+            <a href="https://www.youtube.com/watch?v=yfHCTsvWi7k" target="_blank">
+                <div class="thumbnail-container">
+                    <img class="thumbnail" src="https://img.youtube.com/vi/yfHCTsvWi7k/maxresdefault.jpg" alt="Building Software Systems thumbnail">
+                </div>
+                <div class="talk-content">
+                    <div class="talk-title">Global Guild Outlook</div>
+                    <div class="talk-date">2023</div>
+                    <div class="talk-description">A glimpse into the future of guilds.</div>
+                </div>
+            </a>
+        </div>
+
+        <div class="talk-item">
+            <a href="https://www.youtube.com/watch?v=sVHAbS-7fsA" target="_blank">
+                <div class="thumbnail-container">
+                    <img class="thumbnail" src="https://img.youtube.com/vi/sVHAbS-7fsA/maxresdefault.jpg" alt="System Design talk thumbnail">
+                </div>
+                <div class="talk-content">
+                    <div class="talk-title">Around the World with Play to Earn</div>
+                    <div class="talk-date">2022</div>
+                    <div class="talk-description">Around the World With Play-to-Earn</div>
+                </div>
+            </a>
+        </div>
+
+        <div class="talk-item">
+            <a href="https://www.youtube.com/watch?v=sA_d45xn6yo" target="_blank">
+                <div class="thumbnail-container">
+                    <img class="thumbnail" src="https://img.youtube.com/vi/sA_d45xn6yo/maxresdefault.jpg" alt="Software Development talk thumbnail">
+                </div>
+                <div class="talk-content">
+                    <div class="talk-title">The Role of Guilds in the Web3 Gaming Revolution</div>
+                    <div class="talk-date">2023</div>
+                    <div class="talk-description">The Role of Guilds in the Web3 Gaming Revolution</div>
+                </div>
+            </a>
+        </div>
+
+        <div class="talk-item">
+            <a href="https://www.youtube.com/watch?v=lUg3jDm0AmU" target="_blank">
+                <div class="thumbnail-container">
+                    <img class="thumbnail" src="https://img.youtube.com/vi/lUg3jDm0AmU/maxresdefault.jpg" alt="Tech Innovation talk thumbnail">
+                </div>
+                <div class="talk-content">
+                    <div class="talk-title">Web3, play to Earn and the Rise of Crypto Gaming Guilds</div>
+                    <div class="talk-date">2023</div>
+                    <div class="talk-description">Discussing the latest trends and innovations in Gaming Guilds.</div>
+                </div>
+            </a>
+        </div>
+    </div>
+</body>
+</html> 
