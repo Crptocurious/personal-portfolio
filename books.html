@@ -14,6 +14,25 @@
             color: #333;
         }
 
+        .header-container {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 12px;
+            object-fit: cover;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .header-text {
+            flex: 1;
+        }
+
         h1 {
             font-size: 2.5rem;
             margin-bottom: 1.5rem;
@@ -94,6 +113,27 @@
             font-style: italic;
             margin-left: 0.5rem;
         }
+
+        @media (max-width: 600px) {
+            .header-container {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .profile-image {
+                width: 120px;
+                height: 120px;
+            }
+            
+            body {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -106,10 +146,14 @@
         </ul>
     </nav>
 
-    <h1>Bookshelf</h1>
-
-    <div class="intro">
-        <p>A collection of books I've read and found interesting. Some of these have significantly influenced my thinking and approach to technology, business, and life.</p>
+    <div class="header-container">
+        <img src="/profile.jpg" alt="Abhishek Anand" class="profile-image" loading="lazy">
+        <div class="header-text">
+            <h1>Bookshelf</h1>
+            <div class="intro">
+                <p>A collection of books I've read and found interesting. Some of these have significantly influenced my thinking and approach to technology, business, and life.</p>
+            </div>
+        </div>
     </div>
 
     <div class="year-nav">
@@ -124,67 +168,67 @@
     <section id="2025">
         <h2>2025</h2>
         <ul class="book-list">
-            <li>The Worlds I See <span class="book-subtitle">Curiosity, Exploration, and Discovery at the Dawn of AI</span></li>
             <li>Thinking in Bets <span class="book-subtitle">Making Smarter Decisions When You Don't Have All the Facts</span></li>
+            <li>The Worlds I See <span class="book-subtitle">Curiosity, Exploration, and Discovery at the Dawn of AI</span></li>
         </ul>
     </section>
 
     <section id="2024">
         <h2>2024</h2>
         <ul class="book-list">
-            <li>It Happened in India <span class="book-subtitle">The Story of Pantaloons, Big Bazaar, Central and the Great Indian Consumer</span></li>
-            <li>Earnicorns <span class="book-subtitle">Inside the World of Web3 Gaming Guilds</span></li>
-            <li>Buy Then Build <span class="book-subtitle">How Acquisition Entrepreneurs Outsmart the Startup Game</span></li>
-            <li>Never Enough <span class="book-subtitle">From Barista to Billionaire</span></li>
-            <li>Pattern Breakers <span class="book-subtitle">The Untold Story of India's Unicorns</span></li>
-            <li>How the Internet Happened <span class="book-subtitle">From Netscape to the iPhone</span></li>
-            <li>The Money Trap <span class="book-subtitle">A Practical Guide to Financial Success</span></li>
-            <li>AI 2041 <span class="book-subtitle">Ten Visions for Our Future</span></li>
-            <li>Super AI Wars <span class="book-subtitle">The Battle for the Future of Artificial Intelligence</span></li>
-            <li>Prisoners of Geography <span class="book-subtitle">Ten Maps That Tell You Everything You Need to Know About Global Politics</span></li>
-            <li>Invent & Wander <span class="book-subtitle">The Collected Writings of Jeff Bezos</span></li>
-            <li>Chip War <span class="book-subtitle">The Fight for the World's Most Critical Technology</span></li>
-            <li>The Lean Startup <span class="book-subtitle">How Today's Entrepreneurs Use Continuous Innovation to Create Radically Successful Businesses</span></li>
-            <li>The Mom Test <span class="book-subtitle">How to Talk to Customers & Learn if Your Business is a Good Idea</span></li>
-            <li>Khanmigo <span class="book-subtitle">Learning in the Age of AI</span></li>
-            <li>Growth Hacking <span class="book-subtitle">Silicon Valley's Best Kept Secret</span></li>
             <li>The NVIDIA Way <span class="book-subtitle">How AI Computing Company Became the Most Valuable Chip Company</span></li>
+            <li>Growth Hacking <span class="book-subtitle">Silicon Valley's Best Kept Secret</span></li>
+            <li>Khanmigo <span class="book-subtitle">Learning in the Age of AI</span></li>
+            <li>The Mom Test <span class="book-subtitle">How to Talk to Customers & Learn if Your Business is a Good Idea</span></li>
+            <li>The Lean Startup <span class="book-subtitle">How Today's Entrepreneurs Use Continuous Innovation to Create Radically Successful Businesses</span></li>
+            <li>Chip War <span class="book-subtitle">The Fight for the World's Most Critical Technology</span></li>
+            <li>Invent & Wander <span class="book-subtitle">The Collected Writings of Jeff Bezos</span></li>
+            <li>Prisoners of Geography <span class="book-subtitle">Ten Maps That Tell You Everything You Need to Know About Global Politics</span></li>
+            <li>Super AI Wars <span class="book-subtitle">The Battle for the Future of Artificial Intelligence</span></li>
+            <li>AI 2041 <span class="book-subtitle">Ten Visions for Our Future</span></li>
+            <li>The Money Trap <span class="book-subtitle">A Practical Guide to Financial Success</span></li>
+            <li>How the Internet Happened <span class="book-subtitle">From Netscape to the iPhone</span></li>
+            <li>Pattern Breakers <span class="book-subtitle">The Untold Story of India's Unicorns</span></li>
+            <li>Never Enough <span class="book-subtitle">From Barista to Billionaire</span></li>
+            <li>Buy Then Build <span class="book-subtitle">How Acquisition Entrepreneurs Outsmart the Startup Game</span></li>
+            <li>Earnicorns <span class="book-subtitle">Inside the World of Web3 Gaming Guilds</span></li>
+            <li>It Happened in India <span class="book-subtitle">The Story of Pantaloons, Big Bazaar, Central and the Great Indian Consumer</span></li>
         </ul>
     </section>
 
     <section id="2023">
         <h2>2023</h2>
         <ul class="book-list">
-            <li>Atomic Habits <span class="book-subtitle">An Easy & Proven Way to Build Good Habits & Break Bad Ones</span></li>
-            <li>The Anthology of Balaji <span class="book-subtitle">A Guide to Technology, Truth, and Building the Future</span></li>
-            <li>Influence Empire <span class="book-subtitle">The Story of Tencent and China's Tech Ambition</span></li>
-            <li>Principles <span class="book-subtitle">Life and Work</span></li>
-            <li>Continuous Discovery Habits <span class="book-subtitle">Discover Products that Create Customer Value and Business Value</span></li>
-            <li>Founders at Work <span class="book-subtitle">Stories of Startups' Early Days</span></li>
-            <li>The Four Steps to the Epiphany <span class="book-subtitle">Successful Strategies for Products that Win</span></li>
-            <li>The Xiaomi Way <span class="book-subtitle">Customer Engagement Strategies That Built One of the Largest Smartphone Companies in the World</span></li>
-            <li>Attention Factory <span class="book-subtitle">The Story of TikTok and China's ByteDance</span></li>
-            <li>The Cold Start Problem <span class="book-subtitle">How to Start and Scale Network Effects</span></li>
             <li>Loonshots <span class="book-subtitle">How to Nurture the Crazy Ideas That Win Wars, Cure Diseases, and Transform Industries</span></li>
+            <li>The Cold Start Problem <span class="book-subtitle">How to Start and Scale Network Effects</span></li>
+            <li>Attention Factory <span class="book-subtitle">The Story of TikTok and China's ByteDance</span></li>
+            <li>The Xiaomi Way <span class="book-subtitle">Customer Engagement Strategies That Built One of the Largest Smartphone Companies in the World</span></li>
+            <li>The Four Steps to the Epiphany <span class="book-subtitle">Successful Strategies for Products that Win</span></li>
+            <li>Founders at Work <span class="book-subtitle">Stories of Startups' Early Days</span></li>
+            <li>Continuous Discovery Habits <span class="book-subtitle">Discover Products that Create Customer Value and Business Value</span></li>
+            <li>Principles <span class="book-subtitle">Life and Work</span></li>
+            <li>Influence Empire <span class="book-subtitle">The Story of Tencent and China's Tech Ambition</span></li>
+            <li>The Anthology of Balaji <span class="book-subtitle">A Guide to Technology, Truth, and Building the Future</span></li>
+            <li>Atomic Habits <span class="book-subtitle">An Easy & Proven Way to Build Good Habits & Break Bad Ones</span></li>
         </ul>
     </section>
 
     <section id="2022">
         <h2>2022</h2>
         <ul class="book-list">
-            <li>Glucose Revolution <span class="book-subtitle">The Life-Changing Power of Balancing Your Blood Sugar</span></li>
-            <li>No Filter <span class="book-subtitle">The Inside Story of Instagram</span></li>
             <li>Traction <span class="book-subtitle">How Any Startup Can Achieve Explosive Customer Growth</span></li>
+            <li>No Filter <span class="book-subtitle">The Inside Story of Instagram</span></li>
+            <li>Glucose Revolution <span class="book-subtitle">The Life-Changing Power of Balancing Your Blood Sugar</span></li>
         </ul>
     </section>
 
     <section id="2021">
         <h2>2021</h2>
         <ul class="book-list">
-            <li>How to DeFi <span class="book-subtitle">Advanced</span></li>
-            <li>The Infinite Machine <span class="book-subtitle">How an Army of Crypto-Hackers Is Building the Next Internet with Ethereum</span></li>
-            <li>The Dhandho Investor <span class="book-subtitle">The Low-Risk Value Method to High Returns</span></li>
             <li>Lost and Founder <span class="book-subtitle">A Painfully Honest Field Guide to the Startup World</span></li>
+            <li>The Dhandho Investor <span class="book-subtitle">The Low-Risk Value Method to High Returns</span></li>
+            <li>The Infinite Machine <span class="book-subtitle">How an Army of Crypto-Hackers Is Building the Next Internet with Ethereum</span></li>
+            <li>How to DeFi <span class="book-subtitle">Advanced</span></li>
         </ul>
     </section>
 
