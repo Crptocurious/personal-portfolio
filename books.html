@@ -15,18 +15,7 @@
         }
 
         .header-container {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
             margin-bottom: 2rem;
-        }
-
-        .profile-image {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
         .header-text {
@@ -116,14 +105,7 @@
 
         @media (max-width: 600px) {
             .header-container {
-                flex-direction: column;
-                align-items: flex-start;
                 gap: 1rem;
-            }
-
-            .profile-image {
-                width: 120px;
-                height: 120px;
             }
             
             body {
@@ -147,11 +129,10 @@
     </nav>
 
     <div class="header-container">
-        <img src="profile.jpg" alt="Abhishek Anand" class="profile-image" loading="lazy">
         <div class="header-text">
             <h1>Bookshelf</h1>
             <div class="intro">
-                <p>A collection of books I've read and found interesting. Some of these have significantly influenced my thinking and approach to technology, business, and life.</p>
+                <p>A collection of books I've read and found interesting. Some of these have significantly influenced my thinking and approach to startups, business, and life in general.</p>
             </div>
         </div>
     </div>
