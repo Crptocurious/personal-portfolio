@@ -131,15 +131,15 @@
     <script>
         (function() {
             try {
-                // Use production API URL if on production domain, otherwise use localhost
-                const isProduction = window.location.hostname === 'abhishekanand.me' || 
-                                   window.location.hostname === 'www.abhishekanand.me';
-                const API_URL = isProduction
-                    ? 'https://personal-portfolio-crptocurious.vercel.app/api'
-                    : 'http://localhost:3000/api';
+                // Use production API URL if not on localhost
+                const isLocalhost = window.location.hostname === 'localhost' || 
+                                  window.location.hostname === '127.0.0.1';
+                const API_URL = isLocalhost
+                    ? 'http://localhost:3000/api'
+                    : 'https://personal-portfolio-api-crptocurious.vercel.app/api';
 
                 console.log('Current hostname:', window.location.hostname);
-                console.log('Is production:', isProduction);
+                console.log('Is localhost:', isLocalhost);
                 console.log('Using API URL:', API_URL);
 
                 function createViewCountSpan() {
@@ -161,10 +161,23 @@
                     console.error('View count error:', error);
                 }
 
+                // Function to create a safe URL key
+                function createUrlKey(url) {
+                    try {
+                        // Create a base64 encoded string of the URL, handling special characters
+                        const safeUrl = encodeURIComponent(url);
+                        return btoa(safeUrl).replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
+                    } catch (error) {
+                        console.error('Error creating URL key:', error);
+                        return encodeURIComponent(url);
+                    }
+                }
+
                 async function getViewCount(url) {
                     try {
                         console.log('Fetching view count for:', url);
-                        const response = await fetch(`${API_URL}/views/${encodeURIComponent(url)}`);
+                        const urlKey = createUrlKey(url);
+                        const response = await fetch(`${API_URL}/views/${urlKey}`);
                         console.log('Response status:', response.status);
                         if (!response.ok) {
                             const errorText = await response.text();
@@ -182,7 +195,8 @@
                 async function incrementViewCount(url) {
                     try {
                         console.log('Incrementing view count for:', url);
-                        const response = await fetch(`${API_URL}/views/${encodeURIComponent(url)}`, {
+                        const urlKey = createUrlKey(url);
+                        const response = await fetch(`${API_URL}/views/${urlKey}`, {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'

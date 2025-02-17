@@ -7,8 +7,9 @@ const app = express();
 
 // Request logging middleware
 app.use((req, res, next) => {
-    console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
-    console.log('Headers:', req.headers);
+    const timestamp = new Date().toISOString();
+    console.log(`[${timestamp}] ${req.method} ${req.url}`);
+    console.log('Headers:', JSON.stringify(req.headers, null, 2));
     next();
 });
 
@@ -16,30 +17,40 @@ app.use((req, res, next) => {
 const allowedOrigins = [
     'http://localhost:3000',
     'http://localhost:5000',
-    'https://abhishekanand.me',  // Add your production domain
-    'https://www.abhishekanand.me',  // Add www subdomain if needed
-    'https://personal-portfolio-crptocurious.vercel.app',  // Updated Vercel URL
+    'http://127.0.0.1:3000',
+    'http://127.0.0.1:5000',
+    'https://abhishekanand.me',
+    'https://www.abhishekanand.me',
+    'https://personal-portfolio-crptocurious.vercel.app',
     'https://personal-portfolio-git-main-crptocurious.vercel.app',
-    'https://personal-portfolio-api-nine.vercel.app'
+    'https://personal-portfolio-api-crptocurious.vercel.app',
+    'https://crptocurious.github.io'
 ];
 
-console.log('Allowed origins:', allowedOrigins);
+console.log('Configured allowed origins:', allowedOrigins);
 
 app.use(cors({
     origin: function(origin, callback) {
-        console.log('Request origin:', origin);
+        console.log('Incoming request from origin:', origin);
+        
         // Allow requests with no origin (like mobile apps or curl requests)
-        if (!origin) return callback(null, true);
+        if (!origin) {
+            console.log('No origin header, allowing request');
+            return callback(null, true);
+        }
         
         if (allowedOrigins.indexOf(origin) === -1) {
             const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
             console.error('CORS error:', { origin, allowedOrigins });
             return callback(new Error(msg), false);
         }
+
+        console.log('Origin allowed:', origin);
         return callback(null, true);
     },
-    methods: ['GET', 'POST'],
-    credentials: true
+    methods: ['GET', 'POST', 'OPTIONS'],
+    credentials: true,
+    optionsSuccessStatus: 200
 }));
 
 app.use(express.json());
@@ -50,22 +61,52 @@ const supabase = createClient(
     process.env.SUPABASE_ANON_KEY
 );
 
-// Verify Supabase connection on startup
-async function testSupabaseConnection() {
+// Function to decode URL key
+function decodeUrlKey(urlKey) {
     try {
-        const { data, error } = await supabase.from('page_views').select('count(*)', { count: 'exact' });
-        if (error) throw error;
-        console.log('Successfully connected to Supabase');
+        // First try base64 decoding
+        const base64 = urlKey.replace(/-/g, '+').replace(/_/g, '/');
+        const padded = base64.padEnd(base64.length + (4 - (base64.length % 4)) % 4, '=');
+        const decoded = Buffer.from(padded, 'base64').toString();
+        // Then decode the URI component
+        return decodeURIComponent(decoded);
     } catch (error) {
-        console.error('Error connecting to Supabase:', error);
+        console.error('Error decoding URL key:', error);
+        try {
+            // Fallback to just URI decoding
+            return decodeURIComponent(urlKey);
+        } catch (error) {
+            console.error('Error decoding URL key (fallback):', error);
+            return null;
+        }
     }
 }
 
-testSupabaseConnection();
+// Add debug endpoint
+app.get('/debug/url/:urlKey', (req, res) => {
+    const urlKey = req.params.urlKey;
+    const decoded = decodeUrlKey(urlKey);
+    res.json({
+        original: urlKey,
+        decoded: decoded,
+        isValid: decoded !== null
+    });
+});
+
+// Add a health check endpoint
+app.get('/', (req, res) => {
+    res.json({ status: 'API is running' });
+});
 
 // Get view count for a specific URL
-app.get('/api/views/:url', async (req, res) => {
-    const url = decodeURIComponent(req.params.url);
+app.get('/api/views/:urlKey', async (req, res) => {
+    const urlKey = req.params.urlKey;
+    const url = decodeUrlKey(urlKey);
+    
+    if (!url) {
+        return res.status(400).json({ error: 'Invalid URL key' });
+    }
+    
     console.log('Getting view count for URL:', url);
     
     try {
@@ -89,8 +130,14 @@ app.get('/api/views/:url', async (req, res) => {
 });
 
 // Increment view count for a specific URL
-app.post('/api/views/:url', async (req, res) => {
-    const url = decodeURIComponent(req.params.url);
+app.post('/api/views/:urlKey', async (req, res) => {
+    const urlKey = req.params.urlKey;
+    const url = decodeUrlKey(urlKey);
+    
+    if (!url) {
+        return res.status(400).json({ error: 'Invalid URL key' });
+    }
+    
     console.log('Incrementing view count for URL:', url);
     
     try {
@@ -102,11 +149,6 @@ app.post('/api/views/:url', async (req, res) => {
             .single();
 
         console.log('Existing data:', existingData, 'Select error:', selectError);
-
-        if (selectError && selectError.code !== 'PGRST116') {
-            console.error('Error checking existing record:', selectError);
-            throw selectError;
-        }
 
         let result;
         if (existingData) {
