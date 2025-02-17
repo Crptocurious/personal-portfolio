@@ -129,85 +129,113 @@
         }
     </style>
     <script>
-        // Use production API URL if on production domain, otherwise use localhost
-        const isProduction = window.location.hostname === 'abhishekanand.me' || 
-                            window.location.hostname === 'www.abhishekanand.me';
-        const API_URL = isProduction
-            ? 'https://personal-portfolio-api-nine.vercel.app/api'  // Your Vercel deployment URL
-            : 'http://localhost:3000/api';
-
-        function createViewCountSpan() {
-            const span = document.createElement('span');
-            span.className = 'view-count loading';
-            span.textContent = 'Loading views...';
-            return span;
-        }
-
-        function updateViewCountSpan(span, count) {
-            span.classList.remove('loading', 'error');
-            span.textContent = `${count} ${count === 1 ? 'view' : 'views'}`;
-        }
-
-        function setViewCountError(span) {
-            span.classList.remove('loading');
-            span.classList.add('error');
-            span.textContent = '0 views';
-        }
-
-        async function getViewCount(url) {
+        (function() {
             try {
-                const response = await fetch(`${API_URL}/views/${encodeURIComponent(url)}`);
-                if (!response.ok) throw new Error('Failed to fetch view count');
-                const data = await response.json();
-                return data.views || 0;
-            } catch (error) {
-                console.error('Error fetching view count:', error);
-                return 0;
-            }
-        }
+                // Use production API URL if on production domain, otherwise use localhost
+                const isProduction = window.location.hostname === 'abhishekanand.me' || 
+                                   window.location.hostname === 'www.abhishekanand.me';
+                const API_URL = isProduction
+                    ? 'https://personal-portfolio-crptocurious.vercel.app/api'
+                    : 'http://localhost:3000/api';
 
-        async function incrementViewCount(url) {
-            try {
-                const response = await fetch(`${API_URL}/views/${encodeURIComponent(url)}`, {
-                    method: 'POST'
-                });
-                if (!response.ok) throw new Error('Failed to increment view count');
-                const data = await response.json();
-                return data.views || 0;
-            } catch (error) {
-                console.error('Error incrementing view count:', error);
-                return null;
-            }
-        }
+                console.log('Current hostname:', window.location.hostname);
+                console.log('Is production:', isProduction);
+                console.log('Using API URL:', API_URL);
 
-        async function updateViewCounts() {
-            const links = document.querySelectorAll('.essay-item a');
-            
-            for (const link of links) {
-                const url = link.href;
-                const viewSpan = createViewCountSpan();
-                link.parentNode.appendChild(viewSpan);
-
-                try {
-                    const viewCount = await getViewCount(url);
-                    updateViewCountSpan(viewSpan, viewCount);
-
-                    link.addEventListener('click', async (e) => {
-                        viewSpan.classList.add('loading');
-                        const newCount = await incrementViewCount(url);
-                        if (newCount !== null) {
-                            updateViewCountSpan(viewSpan, newCount);
-                        } else {
-                            setViewCountError(viewSpan);
-                        }
-                    });
-                } catch (error) {
-                    setViewCountError(viewSpan);
+                function createViewCountSpan() {
+                    const span = document.createElement('span');
+                    span.className = 'view-count loading';
+                    span.textContent = 'Loading views...';
+                    return span;
                 }
-            }
-        }
 
-        document.addEventListener('DOMContentLoaded', updateViewCounts);
+                function updateViewCountSpan(span, count) {
+                    span.classList.remove('loading', 'error');
+                    span.textContent = `${count} ${count === 1 ? 'view' : 'views'}`;
+                }
+
+                function setViewCountError(span, error) {
+                    span.classList.remove('loading');
+                    span.classList.add('error');
+                    span.textContent = '0 views';
+                    console.error('View count error:', error);
+                }
+
+                async function getViewCount(url) {
+                    try {
+                        console.log('Fetching view count for:', url);
+                        const response = await fetch(`${API_URL}/views/${encodeURIComponent(url)}`);
+                        console.log('Response status:', response.status);
+                        if (!response.ok) {
+                            const errorText = await response.text();
+                            throw new Error(`Failed to fetch view count: ${response.status} ${errorText}`);
+                        }
+                        const data = await response.json();
+                        console.log('View count data:', data);
+                        return data.views || 0;
+                    } catch (error) {
+                        console.error('Error fetching view count:', error);
+                        return 0;
+                    }
+                }
+
+                async function incrementViewCount(url) {
+                    try {
+                        console.log('Incrementing view count for:', url);
+                        const response = await fetch(`${API_URL}/views/${encodeURIComponent(url)}`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        });
+                        console.log('Response status:', response.status);
+                        if (!response.ok) {
+                            const errorText = await response.text();
+                            throw new Error(`Failed to increment view count: ${response.status} ${errorText}`);
+                        }
+                        const data = await response.json();
+                        console.log('Updated view count:', data);
+                        return data.views || 0;
+                    } catch (error) {
+                        console.error('Error incrementing view count:', error);
+                        return null;
+                    }
+                }
+
+                async function updateViewCounts() {
+                    const links = document.querySelectorAll('.essay-item a');
+                    console.log('Found links:', links.length);
+                    
+                    for (const link of links) {
+                        const url = link.href;
+                        console.log('Processing link:', url);
+                        const viewSpan = createViewCountSpan();
+                        link.parentNode.appendChild(viewSpan);
+
+                        try {
+                            const viewCount = await getViewCount(url);
+                            updateViewCountSpan(viewSpan, viewCount);
+
+                            link.addEventListener('click', async (e) => {
+                                viewSpan.classList.add('loading');
+                                const newCount = await incrementViewCount(url);
+                                if (newCount !== null) {
+                                    updateViewCountSpan(viewSpan, newCount);
+                                } else {
+                                    setViewCountError(viewSpan, 'Failed to increment count');
+                                }
+                            });
+                        } catch (error) {
+                            setViewCountError(viewSpan, error);
+                        }
+                    }
+                }
+
+                document.addEventListener('DOMContentLoaded', updateViewCounts);
+            } catch (error) {
+                console.error('Error initializing view counter:', error);
+            }
+        })();
     </script>
 </head>
 <body>
