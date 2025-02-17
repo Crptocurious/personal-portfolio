@@ -129,7 +129,12 @@
         }
     </style>
     <script>
-        const API_URL = 'http://localhost:3000/api';
+        // Use production API URL if on production domain, otherwise use localhost
+        const isProduction = window.location.hostname === 'abhishekanand.me' || 
+                            window.location.hostname === 'www.abhishekanand.me';
+        const API_URL = isProduction
+            ? 'https://personal-portfolio-api-nine.vercel.app/api'  // Your Vercel deployment URL
+            : 'http://localhost:3000/api';
 
         function createViewCountSpan() {
             const span = document.createElement('span');

@@ -4,7 +4,33 @@ const cors = require('cors');
 const { createClient } = require('@supabase/supabase-js');
 
 const app = express();
-app.use(cors());
+
+// Configure CORS for both development and production
+const allowedOrigins = [
+    'http://localhost:3000',
+    'http://localhost:5000',
+    'https://abhishekanand.me',  // Add your production domain
+    'https://www.abhishekanand.me',  // Add www subdomain if needed
+    'https://personal-portfolio-api-nine.vercel.app',  // Vercel deployment URL
+    'https://personal-portfolio-git-main-crptocurious.vercel.app', // Vercel preview URL
+    'https://personal-portfolio-crptocurious.vercel.app'  // Vercel production URL
+];
+
+app.use(cors({
+    origin: function(origin, callback) {
+        // Allow requests with no origin (like mobile apps or curl requests)
+        if (!origin) return callback(null, true);
+        
+        if (allowedOrigins.indexOf(origin) === -1) {
+            const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+            return callback(new Error(msg), false);
+        }
+        return callback(null, true);
+    },
+    methods: ['GET', 'POST'],
+    credentials: true
+}));
+
 app.use(express.json());
 
 // Initialize Supabase client
