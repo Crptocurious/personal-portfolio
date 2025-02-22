@@ -114,6 +114,14 @@
             color: #ff6b6b;
         }
 
+        .view-counter {
+            color: #666;
+            font-size: 0.5em;
+            font-weight: normal;
+            display: inline-block;
+            margin-left: 10px;
+        }
+
         @media (max-width: 600px) {
             .header-container {
                 gap: 1rem;
@@ -128,128 +136,13 @@
             }
         }
     </style>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0WX1EKYMQ7"></script>
     <script>
-        (function() {
-            try {
-                // Use production API URL if not on localhost
-                const isLocalhost = window.location.hostname === 'localhost' || 
-                                  window.location.hostname === '127.0.0.1';
-                const API_URL = isLocalhost
-                    ? 'http://localhost:3000/api'
-                    : 'https://personal-portfolio-api-crptocurious.vercel.app/api';
-
-                console.log('Current hostname:', window.location.hostname);
-                console.log('Is localhost:', isLocalhost);
-                console.log('Using API URL:', API_URL);
-
-                function createViewCountSpan() {
-                    const span = document.createElement('span');
-                    span.className = 'view-count loading';
-                    span.textContent = 'Loading views...';
-                    return span;
-                }
-
-                function updateViewCountSpan(span, count) {
-                    span.classList.remove('loading', 'error');
-                    span.textContent = `${count} ${count === 1 ? 'view' : 'views'}`;
-                }
-
-                function setViewCountError(span, error) {
-                    span.classList.remove('loading');
-                    span.classList.add('error');
-                    span.textContent = '0 views';
-                    console.error('View count error:', error);
-                }
-
-                // Function to create a safe URL key
-                function createUrlKey(url) {
-                    try {
-                        // Create a base64 encoded string of the URL, handling special characters
-                        const safeUrl = encodeURIComponent(url);
-                        return btoa(safeUrl).replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
-                    } catch (error) {
-                        console.error('Error creating URL key:', error);
-                        return encodeURIComponent(url);
-                    }
-                }
-
-                async function getViewCount(url) {
-                    try {
-                        console.log('Fetching view count for:', url);
-                        const urlKey = createUrlKey(url);
-                        const response = await fetch(`${API_URL}/views/${urlKey}`);
-                        console.log('Response status:', response.status);
-                        if (!response.ok) {
-                            const errorText = await response.text();
-                            throw new Error(`Failed to fetch view count: ${response.status} ${errorText}`);
-                        }
-                        const data = await response.json();
-                        console.log('View count data:', data);
-                        return data.views || 0;
-                    } catch (error) {
-                        console.error('Error fetching view count:', error);
-                        return 0;
-                    }
-                }
-
-                async function incrementViewCount(url) {
-                    try {
-                        console.log('Incrementing view count for:', url);
-                        const urlKey = createUrlKey(url);
-                        const response = await fetch(`${API_URL}/views/${urlKey}`, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            }
-                        });
-                        console.log('Response status:', response.status);
-                        if (!response.ok) {
-                            const errorText = await response.text();
-                            throw new Error(`Failed to increment view count: ${response.status} ${errorText}`);
-                        }
-                        const data = await response.json();
-                        console.log('Updated view count:', data);
-                        return data.views || 0;
-                    } catch (error) {
-                        console.error('Error incrementing view count:', error);
-                        return null;
-                    }
-                }
-
-                async function updateViewCounts() {
-                    const links = document.querySelectorAll('.essay-item a');
-                    console.log('Found links:', links.length);
-                    
-                    for (const link of links) {
-                        const url = link.href;
-                        console.log('Processing link:', url);
-                        const viewSpan = createViewCountSpan();
-                        link.parentNode.appendChild(viewSpan);
-
-                        try {
-                            const viewCount = await getViewCount(url);
-                            updateViewCountSpan(viewSpan, viewCount);
-
-                            link.addEventListener('click', async (e) => {
-                                viewSpan.classList.add('loading');
-                                const newCount = await incrementViewCount(url);
-                                if (newCount !== null) {
-                                    updateViewCountSpan(viewSpan, newCount);
-                                } else {
-                                    setViewCountError(viewSpan, 'Failed to increment count');
-                                }
-                            });
-                        } catch (error) {
-                            setViewCountError(viewSpan, error);
-                        }
-                    }
-                }
-
-                document.addEventListener('DOMContentLoaded', updateViewCounts);
-            } catch (error) {
-                console.error('Error initializing view counter:', error);
-            }
-        })();
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-0WX1EKYMQ7');
     </script>
 </head>
 <body>
@@ -264,7 +157,7 @@
 
     <div class="header-container">
         <div class="header-text">
-            <h1>All essays and posts</h1>
+            <h1>All essays and posts <span class="view-counter">(<span id="viewCount">0</span> views)</span></h1>
         </div>
     </div>
 
@@ -317,5 +210,34 @@
             </li>
         </ul>
     </section>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const pageId = window.location.pathname;
+        let viewCount = localStorage.getItem(`viewCount_${pageId}`) || 0;
+        viewCount = parseInt(viewCount) + 1;
+        localStorage.setItem(`viewCount_${pageId}`, viewCount);
+        
+        // Get visitor's country
+        fetch('https://ipapi.co/json/')
+            .then(response => response.json())
+            .then(data => {
+                // Store country data
+                let countryStats = JSON.parse(localStorage.getItem('countryStats') || '{}');
+                const country = data.country_name;
+                countryStats[country] = (countryStats[country] || 0) + 1;
+                localStorage.setItem('countryStats', JSON.stringify(countryStats));
+                
+                // Display stats if you want
+                console.log('Visitor Countries:', countryStats);
+            })
+            .catch(error => console.error('Error fetching location:', error));
+        
+        const viewCountElement = document.getElementById('viewCount');
+        if (viewCountElement) {
+            viewCountElement.textContent = viewCount;
+        }
+    });
+    </script>
 </body>
 </html> 
