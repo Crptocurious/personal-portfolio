@@ -13,8 +13,6 @@ The website is fully responsive and optimized for:
 - Tablets
 - Mobile phones
 
-Built with ❤️ by Abhishek Anand
-
 ## Deployment
 
 This website is deployed on Vercel as a static site. The deployment is automatically triggered when changes are pushed to the main branch of the GitHub repository.
@@ -35,3 +33,7 @@ This is a simple static HTML website. To make changes:
 
 - The site previously had server-side functionality which has been removed to simplify deployment
 - Analytics are provided by Vercel Analytics
+- Last updated: February 28, 2025
+
+---
+Built with ❤️ by Abhishek Anand
