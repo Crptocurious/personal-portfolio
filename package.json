@@ -1,31 +1,19 @@
 {
   "name": "personalportfolio",
   "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js"
-  },
-  "engines": {
-    "node": ">=18.0.0"
-  },
+  "description": "Personal portfolio website with static HTML pages",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Crptocurious/personal-portfolio.git"
   },
-  "keywords": [],
+  "keywords": ["portfolio", "personal website"],
   "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Crptocurious/personal-portfolio/issues"
   },
   "homepage": "https://github.com/Crptocurious/personal-portfolio#readme",
-  "description": "",
   "dependencies": {
-    "@supabase/supabase-js": "^2.48.1",
-    "@vercel/analytics": "^1.5.0",
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.7",
-    "express": "^4.21.2"
+    "@vercel/analytics": "^1.5.0"
   }
 }
