@@ -98,30 +98,6 @@
             margin-left: 0.5rem;
         }
 
-        .view-count {
-            color: #666;
-            font-size: 0.9rem;
-            margin-left: 0.5rem;
-            display: inline-flex;
-            align-items: center;
-        }
-
-        .view-count.loading {
-            color: #999;
-        }
-
-        .view-count.error {
-            color: #ff6b6b;
-        }
-
-        .view-counter {
-            color: #666;
-            font-size: 0.5em;
-            font-weight: normal;
-            display: inline-block;
-            margin-left: 10px;
-        }
-
         @media (max-width: 600px) {
             .header-container {
                 gap: 1rem;
@@ -159,7 +135,7 @@
 
     <div class="header-container">
         <div class="header-text">
-            <h1>All essays and posts <span class="view-counter">(<span id="viewCount">0</span> views)</span></h1>
+            <h1>All essays and posts</h1>
         </div>
     </div>
 
@@ -212,34 +188,5 @@
             </li>
         </ul>
     </section>
-
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const pageId = window.location.pathname;
-        let viewCount = localStorage.getItem(`viewCount_${pageId}`) || 0;
-        viewCount = parseInt(viewCount) + 1;
-        localStorage.setItem(`viewCount_${pageId}`, viewCount);
-        
-        // Get visitor's country
-        fetch('https://ipapi.co/json/')
-            .then(response => response.json())
-            .then(data => {
-                // Store country data
-                let countryStats = JSON.parse(localStorage.getItem('countryStats') || '{}');
-                const country = data.country_name;
-                countryStats[country] = (countryStats[country] || 0) + 1;
-                localStorage.setItem('countryStats', JSON.stringify(countryStats));
-                
-                // Display stats if you want
-                console.log('Visitor Countries:', countryStats);
-            })
-            .catch(error => console.error('Error fetching location:', error));
-        
-        const viewCountElement = document.getElementById('viewCount');
-        if (viewCountElement) {
-            viewCountElement.textContent = viewCount;
-        }
-    });
-    </script>
 </body>
 </html> 
