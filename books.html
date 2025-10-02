@@ -15,43 +15,43 @@
             padding: 2rem;
         }
 
-        h1, h2, h3, h4, h5, h6 {
+        h1 {
             font-family: 'Georgia', 'Times New Roman', Times, serif;
             font-weight: bold;
             color: #222;
-        }
-
-        .header-container {
-            margin-bottom: 2rem;
-        }
-
-        .header-text {
-            flex: 1;
-        }
-
-        h1 {
             font-size: 2.5rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
+            text-align: left;
         }
 
         h2 {
+            font-family: 'Georgia', 'Times New Roman', Times, serif;
+            font-weight: bold;
+            color: #8B4513;
             font-size: 1.8rem;
-            margin-top: 2.5rem;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        p {
             margin-bottom: 1rem;
-            color: #444;
+            font-size: 1rem;
         }
 
         .nav {
             padding: 1rem 0;
-            border-bottom: 1px solid #eee;
-            margin-bottom: 2rem;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 3rem;
+            text-align: right;
         }
 
         .nav ul {
             display: flex;
             gap: 2rem;
             list-style-type: none;
-            padding-left: 0;
+            padding: 0;
+            margin: 0;
+            justify-content: flex-end;
         }
 
         .nav li {
@@ -67,41 +67,29 @@
             text-decoration: underline;
         }
 
-        .year-nav {
-            margin: 2rem 0;
-        }
-
-        .year-nav a {
-            margin-right: 0.5rem;
-            color: #0366d6;
-        }
-
-        .year-nav span {
-            margin: 0 0.2rem;
-            color: #666;
-        }
-
         .intro {
             margin-bottom: 2rem;
             color: #444;
         }
 
+
         .book-list {
             list-style-type: none;
-            padding-left: 0;
+            padding: 0;
         }
 
         .book-list li {
             margin-bottom: 1rem;
-            padding-left: 1.5rem;
             position: relative;
+            padding-left: 2rem;
         }
 
         .book-list li::before {
             content: "•";
             position: absolute;
             left: 0;
-            color: #666;
+            color: #8B4513;
+            font-weight: bold;
         }
 
         .book-subtitle {
@@ -110,18 +98,27 @@
             margin-left: 0.5rem;
         }
 
+        .section-divider {
+            border: none;
+            height: 1px;
+            background-color: #8B4513;
+            margin: 2rem 0;
+        }
+
         @media (max-width: 600px) {
-            .header-container {
-                gap: 1rem;
-            }
-            
             body {
                 padding: 1rem;
+            }
+
+            .nav ul {
+                flex-direction: column;
+                gap: 1rem;
             }
 
             h1 {
                 font-size: 2rem;
             }
+
         }
     </style>
 </head>
@@ -129,49 +126,34 @@
     <nav class="nav">
         <ul>
             <li><a href="index.html">Home</a></li>
-            <li><a href="books.html">Books</a></li>
-            <li><a href="talks.html">Talks</a></li>
         </ul>
     </nav>
 
-    <div class="header-container">
-        <div class="header-text">
-            <h1>Bookshelf</h1>
-            <div class="intro">
-                <p>A collection of books I've read and found interesting. Some of these have significantly influenced my thinking and approach to startups, business, and life in general.
-                </p>
-            </div>
-        </div>
+    <h1>Bookshelf</h1>
+    <div class="intro">
+        <p>A collection of books I've read and found interesting. Some of these have significantly influenced my thinking and approach to startups, business, and life in general.</p>
     </div>
 
-    <div class="year-nav">
-        <a href="#2025">2025</a> • 
-        <a href="#2024">2024</a> • 
-        <a href="#2023">2023</a> • 
-        <a href="#2022">2022</a> • 
-        <a href="#2021">2021</a> • 
-        <a href="#2020">2020</a>
-    </div>
 
     <section id="2025">
         <h2>2025</h2>
         <ul class="book-list">
-            <li>Originals <span class="book-subtitle"> How Non-Conformists Move the World</span></li>
-            <li>The Anthology of Balaji <span class="book-subtitle"> By Eric Jorgenson</span></li>
-            <li> Our future is biotech <span class="book-subtitle"> By Andrew Craige</span></li>
-            <li>Spent <span class="book-subtitle"> Sex, Evolution, and Consumer Behavior</span></li>
-            <li>AI 2041 <span class="book-subtitle"> 10 visions for our future</span></li>
-            <li>The Metamorphosis of Prime Intellect <span class="book-subtitle"> By Roger Williams</span></li>
-            <li>The 22 Immutable Laws of Marketing <span class="book-subtitle"> By Al Ries and Jack Trout</span></li>
-            <li>Founder Brand <span class="book-subtitle"> Turn Your Story Into Your Competitive Advantage</span></li>
-            <li>Poor Charlie's Almanack <span class="book-subtitle"> The Essential Wit and Wisdom of Charles T. Munger</span></li>
-            <li>Surely You're Joking, Mr. Feynman <span class="book-subtitle"> Adventures of a Curious Character</span></li>
-            <li>Book of Clarity <span class="book-subtitle"> By Paras Chopra</span></li>
-            <li>Working in Public <span class="book-subtitle"> The Making and Maintanence of Open Source Software</span></li>
+            <li>Originals <span class="book-subtitle">How Non-Conformists Move the World</span></li>
+            <li>The Anthology of Balaji <span class="book-subtitle">By Eric Jorgenson</span></li>
+            <li>Our future is biotech <span class="book-subtitle">By Andrew Craige</span></li>
+            <li>Spent <span class="book-subtitle">Sex, Evolution, and Consumer Behavior</span></li>
+            <li>AI 2041 <span class="book-subtitle">10 visions for our future</span></li>
+            <li>The Metamorphosis of Prime Intellect <span class="book-subtitle">By Roger Williams</span></li>
+            <li>The 22 Immutable Laws of Marketing <span class="book-subtitle">By Al Ries and Jack Trout</span></li>
+            <li>Founder Brand <span class="book-subtitle">Turn Your Story Into Your Competitive Advantage</span></li>
+            <li>Poor Charlie's Almanack <span class="book-subtitle">The Essential Wit and Wisdom of Charles T. Munger</span></li>
+            <li>Surely You're Joking, Mr. Feynman <span class="book-subtitle">Adventures of a Curious Character</span></li>
+            <li>Book of Clarity <span class="book-subtitle">By Paras Chopra</span></li>
+            <li>Working in Public <span class="book-subtitle">The Making and Maintenance of Open Source Software</span></li>
             <li>What Life Should Mean To You <span class="book-subtitle">By Alfred Adler</span></li>
             <li>Scaling Laws <span class="book-subtitle">An Oral History of AI, 2019 - 2025</span></li>
-            <li>Mans's Search for Meaning <span class="book-subtitle">The classic tribute to hope from the Holocaust</span></li>
-            <li>Life 3.0 <span class="book-subtitle">Being Human in the age of Artificial Intelligence/<span></li>
+            <li>Man's Search for Meaning <span class="book-subtitle">The classic tribute to hope from the Holocaust</span></li>
+            <li>Life 3.0 <span class="book-subtitle">Being Human in the age of Artificial Intelligence</span></li>
             <li>Born of this land <span class="book-subtitle">My Life Story</span></li>
             <li>The Technological Republic <span class="book-subtitle">Hard Power, Soft Belief, and the Future of the West</span></li>
             <li>Where Good Ideas Come From <span class="book-subtitle">The Natural History of Innovation</span></li>
@@ -181,7 +163,7 @@
             <li>Discipline is Destiny <span class="book-subtitle">The Power of Self-Control</span></li>
             <li>On Writing Well<span class="book-subtitle">The Classic Guide to Writing Non-Fiction</span></li>
             <li>Be Unique The Flipkart Way <span class="book-subtitle">Unravelling Unprecedented Corporate Entrepreneurship</span></li>
-            <li>Zero to One <span class="book-subtitle">Notes o  Startups or How to Build the Future</span></li>
+            <li>Zero to One <span class="book-subtitle">Notes on Startups or How to Build the Future</span></li>
             <li>Thinking in Bets <span class="book-subtitle">Making Smarter Decisions When You Don't Have All the Facts</span></li>
             <li>The Worlds I See <span class="book-subtitle">Curiosity, Exploration, and Discovery at the Dawn of AI</span></li>
         </ul>
@@ -263,4 +245,4 @@
         </ul>
     </section>
 </body>
-</html> 
+</html>
