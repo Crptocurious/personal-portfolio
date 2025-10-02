@@ -13,171 +13,65 @@
             max-width: 800px;
             margin: 0 auto;
             padding: 2rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Georgia', 'Times New Roman', Times, serif;
-            font-weight: bold;
-            color: #222;
         }
 
         h1 {
+            font-family: 'Georgia', 'Times New Roman', Times, serif;
+            font-weight: bold;
+            color: #222;
             font-size: 2.5rem;
             margin-bottom: 1rem;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease forwards;
+            text-align: left;
         }
 
         h2 {
+            font-family: 'Georgia', 'Times New Roman', Times, serif;
+            font-weight: bold;
+            color: #8B4513;
             font-size: 1.8rem;
-            margin-top: 2.5rem;
-            margin-bottom: 1rem;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
         }
 
         p {
             margin-bottom: 1rem;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease forwards;
-            animation-delay: 0.2s;
-        }
-
-        ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
-
-        li {
-            margin-bottom: 0.5rem;
-            transition: transform 0.2s ease;
-        }
-
-        li:hover {
-            transform: translateX(5px);
-        }
-
-        a {
-            color: #0366d6;
-            text-decoration: none;
-            transition: all 0.2s ease;
-            padding: 0.2rem 0.4rem;
-            border-radius: 4px;
-        }
-
-        a:hover {
-            background-color: #f6f8fa;
+            font-size: 1rem;
         }
 
         .nav {
             padding: 1rem 0;
-            border-bottom: 1px solid #eee;
-            margin-bottom: 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 3rem;
+            text-align: right;
         }
 
         .nav ul {
             display: flex;
             gap: 2rem;
+            list-style-type: none;
+            padding: 0;
             margin: 0;
+            justify-content: flex-end;
         }
 
         .nav li {
             margin: 0;
         }
 
-        .about-list {
-            list-style-type: disc;
-            padding-left: 1.5rem;
+        a {
+            color: #0366d6;
+            text-decoration: none;
         }
 
-        .timeline-section {
-            margin-top: 2rem;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease forwards;
-            animation-delay: 0.4s;
-        }
-
-        .timeline-item {
-            margin-bottom: 1.5rem;
-            padding: 1.5rem;
-            border-radius: 8px;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            border: 1px solid #eee;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .timeline-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-
-        .timeline-year {
-            font-weight: bold;
-            color: #24292e;
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-            display: block;
-        }
-
-        .timeline-description {
-            margin: 0;
-        }
-
-        .contact-info {
-            margin: 2rem 0;
-            padding: 1rem;
-            border-radius: 8px;
-            background-color: #f6f8fa;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @media (max-width: 600px) {
-            body {
-                padding: 1rem;
-            }
-
-            .nav ul {
-                gap: 1rem;
-            }
-
-            h1 {
-                font-size: 2rem;
-            }
-        }
-
-        #particles-js {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .nav, .section, h1, h2, .timeline-section, .about-list {
-            position: relative;
+        a:hover {
+            text-decoration: underline;
         }
 
         .header-container {
             display: flex;
             align-items: center;
             gap: 2rem;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
         }
 
         .profile-image {
@@ -186,17 +80,79 @@
             border-radius: 50%;
             object-fit: cover;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            flex-shrink: 0;
         }
 
         .header-text {
             flex: 1;
         }
 
+        .intro-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+
+        .news-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .news-list li {
+            margin-bottom: 1rem;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .news-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #8B4513;
+            font-weight: bold;
+        }
+
+        .section-divider {
+            border: none;
+            height: 1px;
+            background-color: #8B4513;
+            margin: 2rem 0;
+        }
+
+        .contact-info {
+            margin-top: 2rem;
+        }
+
+        .elsewhere-list {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .elsewhere-list li {
+            margin-bottom: 0;
+        }
+
         @media (max-width: 600px) {
+            body {
+                padding: 1rem;
+            }
+
             .header-container {
                 flex-direction: column;
-                align-items: flex-start;
+                align-items: center;
+                text-align: center;
                 gap: 1rem;
+            }
+
+            .nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
             }
 
             .profile-image {
@@ -207,139 +163,57 @@
     </style>
 </head>
 <body>
-    <div id="particles-js"></div>
     <nav class="nav">
         <ul>
-            <li><a href="index.html">Home</a></li>
             <li><a href="books.html">Books</a></li>
-            <li><a href="talks.html">Public Talks</a></li>
         </ul>
     </nav>
 
-    <div class="section" id="home">
-        <div class="header-container">
-            <img 
-                src="/images/profile.jpg" 
-                alt="Abhishek Anand" 
-                class="profile-image"
-                onerror="this.src='/images/default-profile.jpg'; this.onerror=null;"
-            />
-            <div class="header-text">
-                <h1>Abhishek Anand</h1>
-                <p>Researching about AI safety and alignment and it's long term impact on society.</p>
+    <div class="header-container">
+        <img 
+            src="/images/profile.jpg" 
+            alt="Abhishek Anand" 
+            class="profile-image"
+            onerror="this.src='/images/default-profile.jpg'; this.onerror=null;"
+        />
+        <div class="header-text">
+            <h1>Abhishek Anand</h1>
+            <p>I have an unconvential background - studied business and spend the last 10 years building dee . Tinkering with AI agents and researching about embodied agents in virtual worlds.</p>
+            <p class="intro-text">My research interest lies in AI safety and alignment and its long-term impact on society. In particular, I work on multi-agent cooperation and social intelligence in large language models.</p>
+            <div class="contact-info">
             </div>
         </div>
-
-        <div class="timeline-section">
-            <div class="timeline-item">
-                <div class="timeline-year">2025</div>
-                <div class="timeline-description"> Joined Lossfunk as a resident and built Commons Keeper - a new environment to evaluate multi-agentcooperation and social intelligence in large language models. 
-                </div>
-            </div>
-
-
-        <div class="timeline-section">
-            <div class="timeline-item">
-                <div class="timeline-year">2024</div>
-                <div class="timeline-description">Exited Kratos Gaming in May. Later joined as core contributor at Hytopia who is building a modern UGC platform. Think Roblox in the style of Minecraft. Helped the team raised $8mn and setup the publishing arm. Continue to help the team to bootsrap network effects on the platform. 
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-year">2023</div>
-                <div class="timeline-description">Indigg subsequently went on to be acquired by Kratos gaming, started by ex-ceo of a public gaming in India named Nazaara. Post acquisition, we moved Indigg to a community led model where we helped gaming studios acquire users through an on-chain gamer reputation and helped community to generate earnings by completing quests given by gaming studios. This was an inverse facebook model where studios would spend money to acquire relevant cohorts of users and a large part of the value capture (about 70%) would be distributed back to players who completed quests. Grew Kratos gaming from 0 to $2.5mn ARR. 
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-year">2022</div>
-                <div class="timeline-description"> Gaming guild got acquhired by IndiGG. Led IndiGG and grew community from 0 to 1mn + gamers in Asia and an AUM of $5mn. Raised $6mn from the likes of Sequoia, Accel, Polygon, Brevan Howard, Lightspeed etc. Indigg was also a guild play where we would buy assets at preferential rates and then give it to scholars and generate capital returns from assets deployed.
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-year">2021</div>
-                <div class="timeline-description">Exited ewards after I stumbled down the web3 rabbit hole. Started a gaming guild where we built a community of 50K active gamers and over ~$1mn in AUM. We would buy assets in web3 games and generate yield on them by renting them out to gamers from developing economies (most of the games were gated so you required assets to play the game). They would generate earnings which would be distributed between guild and player in 50-50 ratio. We helped over 10k gamers earn over $500k in 6 months.</div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-year">2016 - 2020</div>
-                <div class="timeline-description">Joined ewards founding team in 2016 where we built the leading marketing automation tool for enterprises to help them engage and retain their customers. Grew eWards from from 0 to 4000+ merchants over 4 years. </div>
-            </div>
-        </div>
-
-        <h2>Elsewhere</h2>
-        <ul class="about-list">
-            <li><a href="https://twitter.com/levelheaded_94">Twitter</a></li>
-            <li><a href="https://abhishekanand.substack.com/">Substack</a></li>
-            <li><a href="https://www.linkedin.com/in/abhishek-anand1994/" target="_blank">LinkedIn</a></li>
-            <li><a href="mailto:abhi.1994.anand@gmail.com">Email</a></li>
-        </ul>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script>
-        // Initialize particles.js
-        particlesJS('particles-js', {
-            particles: {
-                number: {
-                    value: 50,
-                    density: {
-                        enable: true,
-                        value_area: 800
-                    }
-                },
-                color: {
-                    value: '#888888'
-                },
-                shape: {
-                    type: 'circle'
-                },
-                opacity: {
-                    value: 0.1,
-                    random: true
-                },
-                size: {
-                    value: 3,
-                    random: true
-                },
-                line_linked: {
-                    enable: true,
-                    distance: 150,
-                    color: '#888888',
-                    opacity: 0.1,
-                    width: 1
-                },
-                move: {
-                    enable: true,
-                    speed: 1,
-                    direction: 'none',
-                    random: true,
-                    straight: false,
-                    out_mode: 'out',
-                    bounce: false
-                }
-            },
-            interactivity: {
-                detect_on: 'canvas',
-                events: {
-                    onhover: {
-                        enable: true,
-                        mode: 'grab'
-                    },
-                    resize: true
-                },
-                modes: {
-                    grab: {
-                        distance: 140,
-                        line_linked: {
-                            opacity: 0.15
-                        }
-                    }
-                }
-            },
-            retina_detect: true
-        });
-    </script>
+    <h2> PreviousWork</h2>
+    <ul class="news-list">
+        <li><strong>Septmber 2025:</strong> Started Redacted Labs
+        <li><strong>Jan 2025:</strong> Joined <a href="https://lossfunk.com" target="_blank">Lossfunk</a> as a resident and built Commons Keeper - a new environment to evaluate multi-agent cooperation and social intelligence in large language models.</li>
+        <li><strong>May 2024:</strong> Exited Kratos Gaming and joined as core contributor at <a href="https://hytopia.com" target="_blank">Hytopia</a>, helping the team raise $8mn and setup the publishing arm.</li>
+        <li><strong>2023:</strong> Indigg was acquired by Kratos Gaming. Grew Kratos gaming from 0 to $2.5mn ARR.</li>
+        <li><strong>2022:</strong> Led IndiGG and grew community from 0 to 1mn+ gamers in Asia with an AUM of $5mn. Raised $6mn from Sequoia, Accel, Polygon, and others.</li>
+        <li><strong>2021:</strong> Started a gaming guild with 50K active gamers and over $1mn in AUM, helping 10k+ gamers earn over $500k in 6 months.</li>
+        <li><strong>2016-2020:</strong> Joined eWards founding team, growing from 0 to 4000+ merchants over 4 years.</li>
+    </ul>
+
+    <p>Outside of work, I'm passionate about mentoring startups who are early in their startup journeys and/or typically write the first angel cheque.. I'm also an extensive reader and love spending my time lost in books in my free time.</p>
+
+    <h2>Public Talks</h2>
+    <ul class="news-list">
+        <li><strong>2023:</strong> <a href="https://www.youtube.com/watch?v=yfHCTsvWi7k" target="_blank">Global Guild Outlook</a> - A glimpse into the future of guilds.</li>
+        <li><strong>2023:</strong> <a href="https://www.youtube.com/watch?v=sA_d45xn6yo" target="_blank">The Role of Guilds in the Web3 Gaming Revolution</a> - Discussing the transformative role of guilds in web3 gaming.</li>
+        <li><strong>2023:</strong> <a href="https://www.youtube.com/watch?v=lUg3jDm0AmU" target="_blank">Web3, Play to Earn and the Rise of Crypto Gaming Guilds</a> - Discussing the latest trends and innovations in Gaming Guilds.</li>
+        <li><strong>2022:</strong> <a href="https://www.youtube.com/watch?v=sVHAbS-7fsA" target="_blank">Around the World with Play to Earn</a> - Exploring the global impact of play-to-earn gaming.</li>
+    </ul>
+
+    <hr class="section-divider">
+
+    <h2>Elsewhere</h2>
+    <ul class="elsewhere-list">
+        <li><a href="https://twitter.com/levelheaded_94" target="_blank">Twitter</a></li>
+        <li><a href="https://abhishekanand.substack.com/" target="_blank">Substack</a></li>
+        <li><a href="https://www.linkedin.com/in/abhishek-anand1994/" target="_blank">LinkedIn</a></li>
+        <li><a href="mailto:abhi.1994.anand@gmail.com">Email</a></li>
+    </ul>
 </body>
-</html> 
+</html>
